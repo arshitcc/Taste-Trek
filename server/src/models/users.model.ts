@@ -2,7 +2,11 @@ import mongoose, { Document } from "mongoose";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { ACCESS_TOKEN_SECRET, ACCESS_TOKEN_EXPIRY, REFRESH_TOKEN_SECRET, REFRESH_TOKEN_EXPIRY } from "../utils/env";
+import { Request } from "express";
 
+export interface CustomRequest extends Request {
+  user: IUser;
+}
 export interface IAddress {
   _id?: string;
   street: string;
