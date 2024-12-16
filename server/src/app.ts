@@ -24,7 +24,9 @@ app.use(express.static('public'));
 app.use(cookieParser());
 
 import userRouter from './routes/user.routes';
+import restaurantRouter from './routes/restaurant.routes';
 
 app.use('/api/v1/users', userRouter);
+app.use('/api/v1/restaurants', restaurantRouter);
 
 export { app }
