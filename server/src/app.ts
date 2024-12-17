@@ -25,8 +25,14 @@ app.use(cookieParser());
 
 import userRouter from './routes/user.routes';
 import restaurantRouter from './routes/restaurant.routes';
+import foodRouter from './routes/food.routes';
+import orderRouter from './routes/order.routes';
+import favouritesRouter from './routes/favourites.routes';
 
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/restaurants', restaurantRouter);
+app.use('/api/v1/foods', foodRouter);
+app.use('/api/v1/orders', orderRouter);
+app.use('/api/v1/favourites', favouritesRouter);
 
 export { app }

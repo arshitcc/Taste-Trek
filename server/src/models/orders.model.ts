@@ -47,7 +47,7 @@ export interface IOrder extends Document {
   status: OrderStatus;
   paymentMethod: PaymentMethod;
   paymentStatus: PaymentStatus;
-  deliveryPartnerID: mongoose.Types.ObjectId;
+  deliveryPartnerId: mongoose.Types.ObjectId;
   deliveryRating: number;
   rating: number;
   preparationTime : number; 
@@ -84,7 +84,7 @@ const orderSchema = new mongoose.Schema<IOrder>(
     status: { type: String,  enum: OrderStatus, default: OrderStatus.PENDING },
     paymentMethod: { type: String, enum: PaymentMethod, default: PaymentMethod.CASH },
     paymentStatus: { type: String, enum: PaymentStatus, default: PaymentStatus.PENDING },
-    deliveryPartnerID: {
+    deliveryPartnerId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       default : null
