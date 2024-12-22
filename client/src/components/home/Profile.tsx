@@ -1,4 +1,5 @@
 import { useState, useRef, FormEvent } from "react";
+import { useUserStore } from "@/store/useUserStore";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -11,13 +12,22 @@ import { useToast } from "@/hooks/use-toast";
 import { Link } from "react-router-dom";
 
 export default function EnhancedProfile() {
+  const {
+    user,
+    updateProfile,
+    updatePassword,
+    updateAvatar,
+    addNewAddress,
+    removeAddress,
+  } = useUserStore();
+
   const [profileData, setProfileData] = useState<
     Pick<IUser, "fullname" | "email" | "username" | "phone">
   >({
-    fullname: "",
-    email: "",
-    username: "",
-    phone: "",
+    fullname: user?.fullname || "",
+    email: user?.email || "",
+    username: user?.username || "",
+    phone: user?.phone || "",
   });
 
   const { toast } = useToast();
@@ -60,6 +70,7 @@ export default function EnhancedProfile() {
     if (file) {
       const formData = new FormData();
       formData.append("avatar", file);
+      await updateAvatar(formData);
       toast({
         title: "Profile Picture Updated",
         description: "Your Profile Picture has been updated successfully",
@@ -70,6 +81,7 @@ export default function EnhancedProfile() {
   const handleProfileUpdate = async (e: FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
+    await updateProfile(profileData);
     setIsLoading(false);
     toast({
       title: "Profile Information Updated",
@@ -80,6 +92,7 @@ export default function EnhancedProfile() {
   const handlePasswordUpdate = async (e: FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
+    await updatePassword(passwordData);
     setIsLoading(false);
     setPasswordData({ oldPassword: "", newPassword: "" });
     toast({
@@ -91,6 +104,7 @@ export default function EnhancedProfile() {
   const handleAddAddress = async (e: FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
+    await addNewAddress(newAddress);
     setIsLoading(false);
     setNewAddress({
       street: "",
@@ -126,8 +140,10 @@ export default function EnhancedProfile() {
                     className="w-20 h-20 cursor-pointer"
                     onClick={() => imageRef.current?.click()}
                   >
-                    <AvatarImage src={""} />
-                    <AvatarFallback>{"U"}</AvatarFallback>
+                    <AvatarImage src={user?.avatar} />
+                    <AvatarFallback>
+                      {user?.fullname?.charAt(0) || "U"}
+                    </AvatarFallback>
                   </Avatar>
                   <input
                     ref={imageRef}
@@ -239,26 +255,36 @@ export default function EnhancedProfile() {
             <CardContent>
               <div className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <Card>
-                    <CardContent className="pt-6">
-                      <div className="flex justify-between items-start">
-                        <Button
-                          variant="destructive"
-                          size="icon"
-                          onClick={() => {
-                            toast({
-                              title: "Address Deleted",
-                              description:
-                                "Your address has been deleted successfully",
-                              variant: "destructive",
-                            });
-                          }}
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </Button>
-                      </div>
-                    </CardContent>
-                  </Card>
+                  {user?.addresses?.map((address, index) => (
+                    <Card key={index}>
+                      <CardContent className="pt-6">
+                        <div className="flex justify-between items-start">
+                          <div>
+                            <p>{address.street}</p>
+                            <p>
+                              {address.city}, {address.country}
+                            </p>
+                            <p>{address.pincode}</p>
+                          </div>
+                          <Button
+                            variant="destructive"
+                            size="icon"
+                            onClick={() => {
+                              removeAddress(address._id!);
+                              toast({
+                                title: "Address Deleted",
+                                description:
+                                  "Your address has been deleted successfully",
+                                variant: "destructive",
+                              });
+                            }}
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </Button>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
                 </div>
                 <form onSubmit={handleAddAddress} className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">

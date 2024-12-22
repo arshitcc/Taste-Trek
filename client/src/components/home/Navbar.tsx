@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ShoppingCart, Loader2, MenuIcon } from "lucide-react";
 import { Button } from "../ui/button";
 import {
@@ -11,8 +11,12 @@ import {
   SheetTrigger,
 } from "../ui/sheet";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { useUserStore } from "@/store/useUserStore";
+import { useCartStore } from "@/store/useCartStore";
 
 const Navbar = () => {
+  const { user, logout } = useUserStore();
+  const { carts } = useCartStore();
   const [isLoading, setIsLoading] = useState(false);
 
   const navItems = [
@@ -38,9 +42,11 @@ const Navbar = () => {
     },
   ];
 
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     setIsLoading(true);
+    logout();
     setIsLoading(false);
   };
 
@@ -73,10 +79,18 @@ const Navbar = () => {
           <div className="flex items-center gap-4">
             <Link to="/carts" className="relative cursor-pointer">
               <ShoppingCart />
+              {carts?.length > 0 && (
+                <Button
+                  size={"icon"}
+                  className="absolute -inset-y-3 left-2 text-xs rounded-full w-4 h-4 bg-red-500 hover:bg-red-500"
+                >
+                  {carts.length}
+                </Button>
+              )}
             </Link>
             <div>
               <Avatar>
-                <AvatarImage src={""} alt="profilephoto" />
+                <AvatarImage src={user?.avatar} alt="profilephoto" />
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
             </div>
@@ -87,9 +101,14 @@ const Navbar = () => {
                   Please wait
                 </Button>
               ) : (
-                <Button onClick={() => {
-                  handleLogout();
-                }}>{""}</Button>
+                <Button
+                  onClick={() => {
+                    if (!user) navigate("/login");
+                    else handleLogout();
+                  }}
+                >
+                  {!user ? "Login" : "Logout"}
+                </Button>
               )}
             </div>
           </div>
@@ -127,9 +146,14 @@ const Navbar = () => {
                         Please wait
                       </Button>
                     ) : (
-                      <Button onClick={() => {
-                        handleLogout();
-                      }}>{""}</Button>
+                      <Button
+                        onClick={() => {
+                          if (!user) navigate("/login");
+                          else handleLogout();
+                        }}
+                      >
+                        {!user ? "Login" : "Logout"}
+                      </Button>
                     )}
                   </div>
                 </div>
