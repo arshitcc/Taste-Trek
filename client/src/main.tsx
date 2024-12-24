@@ -10,6 +10,8 @@ import ContactPage from "./components/home/Contact.tsx";
 import { useUserStore } from "./store/useUserStore.ts";
 import { Navigate } from "react-router-dom";
 import { Toaster } from "./components/ui/toaster.tsx";
+import SearchPage from "./components/user/SearchPage.tsx";
+import RestaurantPage from "./components/user/RestaurantPage.tsx";
 
 const AuthenticatedUser = ({ children }: { children: React.ReactNode }) => {
   const { isAuthenticated } = useUserStore();
@@ -41,11 +43,11 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/search/:searchText",
-        element: <h1>SearchPage</h1>,
+        element: <SearchPage/>,
       },
       {
         path: "/restaurant/:restaurantId",
-        element: <h1>RestaurantPage</h1>,
+        element: <RestaurantPage/>,
       },
       {
         path: "/carts",
