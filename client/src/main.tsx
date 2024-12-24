@@ -12,6 +12,8 @@ import { Navigate } from "react-router-dom";
 import { Toaster } from "./components/ui/toaster.tsx";
 import SearchPage from "./components/user/SearchPage.tsx";
 import RestaurantPage from "./components/user/RestaurantPage.tsx";
+import Carts from "./components/user/Carts.tsx";
+import Cart from "./components/user/Cart.tsx";
 
 const AuthenticatedUser = ({ children }: { children: React.ReactNode }) => {
   const { isAuthenticated } = useUserStore();
@@ -35,7 +37,7 @@ const appRouter = createBrowserRouter([
     children: [
       {
         path: "/",
-        element : <Home/>
+        element: <Home />,
       },
       {
         path: "/profile",
@@ -43,19 +45,19 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/search/:searchText",
-        element: <SearchPage/>,
+        element: <SearchPage />,
       },
       {
         path: "/restaurant/:restaurantId",
-        element: <RestaurantPage/>,
+        element: <RestaurantPage />,
       },
       {
         path: "/carts",
-        element: <h1>Carts</h1>,
+        element: <Carts />,
       },
       {
         path: "/cart/:restaurantId",
-        element: <h1>Cart</h1>,
+        element: <Cart />,
       },
       {
         path: "/orders",
