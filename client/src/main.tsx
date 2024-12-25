@@ -14,6 +14,8 @@ import SearchPage from "./components/user/SearchPage.tsx";
 import RestaurantPage from "./components/user/RestaurantPage.tsx";
 import Carts from "./components/user/Carts.tsx";
 import Cart from "./components/user/Cart.tsx";
+import OrdersPage from "./components/user/OrdersPage.tsx";
+import OrderSummary from "./components/user/OrderSummary.tsx";
 
 const AuthenticatedUser = ({ children }: { children: React.ReactNode }) => {
   const { isAuthenticated } = useUserStore();
@@ -61,11 +63,11 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/orders",
-        element: <h1>OrdersPage</h1>,
+        element: <OrdersPage/>,
       },
       {
         path: "/orders/:orderId",
-        element: <h1>OrderSummary</h1>,
+        element: <OrderSummary/>,
       },
       {
         path: "/admin/new-restaurant",
