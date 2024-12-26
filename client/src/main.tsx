@@ -16,6 +16,8 @@ import Carts from "./components/user/Carts.tsx";
 import Cart from "./components/user/Cart.tsx";
 import OrdersPage from "./components/user/OrdersPage.tsx";
 import OrderSummary from "./components/user/OrderSummary.tsx";
+import AdminDashboard from "./components/admin/AdminDashboard.tsx";
+import CreateRestaurant from "./components/admin/CreateRestaurant.tsx";
 
 const AuthenticatedUser = ({ children }: { children: React.ReactNode }) => {
   const { isAuthenticated } = useUserStore();
@@ -71,11 +73,11 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/admin/new-restaurant",
-        element: <h1>CreateRestaurant</h1>,
+        element: <CreateRestaurant/>,
       },
       {
         path: "/admin/dashboard",
-        element: <h1>AdminDashboard</h1>,
+        element: <AdminDashboard/>,
       },
       {
         path: "/contact",
