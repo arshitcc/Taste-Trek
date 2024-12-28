@@ -4,7 +4,7 @@ import { create, StateCreator } from "zustand";
 import { persist, createJSONStorage, devtools } from "zustand/middleware";
 import { IFavourites, IFavouritesState } from "@/types/favourites";
 
-const API_END_POINT = `/api/v1`;
+const API_END_POINT = `${import.meta.env.VITE_API_URL}/api/v1`;
 axios.defaults.withCredentials = true;
 
 const favouritesStore: StateCreator<IFavouritesState> = (set) => ({

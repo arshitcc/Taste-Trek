@@ -8,7 +8,7 @@ import {
   OrderStatus,
 } from "@/types/order";
 
-const API_END_POINT = `/api/v1/orders`;
+const API_END_POINT = `${import.meta.env.VITE_API_URL}/api/v1/orders`;
 axios.defaults.withCredentials = true;
 
 const orderStore: StateCreator<IOrderState> = (set) => ({

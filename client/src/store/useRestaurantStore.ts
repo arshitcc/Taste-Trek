@@ -8,7 +8,7 @@ import {
   IRestaurantState,
 } from "@/types/restaurant";
 
-const API_END_POINT = `/api/v1/restaurants`;
+const API_END_POINT = `${import.meta.env.VITE_API_URL}/api/v1/restaurants`;
 axios.defaults.withCredentials = true;
 
 const restaurantStore: StateCreator<IRestaurantState> = (set) => ({

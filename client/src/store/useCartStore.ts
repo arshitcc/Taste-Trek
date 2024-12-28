@@ -4,7 +4,7 @@ import { ICartItem, ICartState, ICart } from "@/types/cart";
 import axios from "axios";
 import { toast } from "sonner";
 
-const API_END_POINT = `/api/v1/cart`;
+const API_END_POINT = `${import.meta.env.VITE_API_URL}/api/v1/cart`;
 axios.defaults.withCredentials = true;
 
 const cartStore: StateCreator<ICartState> = (set) => ({

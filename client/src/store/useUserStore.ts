@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { IAddress, IUser, IUserState } from "@/types/user";
 import { UserSignupSchema, UserLoginSchema } from "@/schemas/user";
 
-const API_END_POINT = `/api/v1/users`;
+const API_END_POINT = `${import.meta.env.VITE_API_URL}/api/v1/users`;
 axios.defaults.withCredentials = true;
 
 const userStore: StateCreator<IUserState> = (set) => ({

@@ -4,7 +4,7 @@ import { toast } from "sonner";
 import { create, StateCreator } from "zustand";
 import { persist, devtools, createJSONStorage } from "zustand/middleware";
 
-const API_END_POINT = `/api/v1/foods`;
+const API_END_POINT = `${import.meta.env.VITE_API_URL}/api/v1/foods`;
 axios.defaults.withCredentials = true;
 
 const foodStore: StateCreator<IFoodState> = (set) => ({
