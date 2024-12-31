@@ -21,6 +21,7 @@ const favouritesStore: StateCreator<IFavouritesState> = (set) => ({
       }));
       toast.success(data.message);
     } catch (error: any) {
+      if (error.response?.status === 401) localStorage.clear();
       toast.error(error.response.data.message);
     } finally {
       set({ isLoading: false });
@@ -37,6 +38,7 @@ const favouritesStore: StateCreator<IFavouritesState> = (set) => ({
       }));
       toast.success(data.message);
     } catch (error: any) {
+      if (error.response?.status === 401) localStorage.clear();
       toast.error(error.response.data.message);
     } finally {
       set({ isLoading: false });
@@ -48,6 +50,7 @@ const favouritesStore: StateCreator<IFavouritesState> = (set) => ({
       const { data } = await axios.get(`${API_END_POINT}/favourites`);
       set({ favourites: data.favourites });
     } catch (error: any) {
+      if (error.response?.status === 401) localStorage.clear();
       toast.error(error.response.data.message);
     } finally {
       set({ isLoading: false });

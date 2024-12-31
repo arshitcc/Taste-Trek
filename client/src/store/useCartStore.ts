@@ -49,6 +49,7 @@ const cartStore: StateCreator<ICartState> = (set) => ({
 
       toast.success(data.message);
     } catch (error: any) {
+      if (error.response?.status === 401) localStorage.clear();
       toast.error(
         error.response?.data?.message || "Failed to add item to cart"
       );
@@ -78,6 +79,7 @@ const cartStore: StateCreator<ICartState> = (set) => ({
       set({ items: data.data.cart.items });
       toast.success(data.message);
     } catch (error: any) {
+      if (error.response?.status === 401) localStorage.clear();
       toast.error(
         error.response?.data?.message || "Failed to remove item from cart"
       );
@@ -98,6 +100,7 @@ const cartStore: StateCreator<ICartState> = (set) => ({
       }));
       toast.success(data.message);
     } catch (error: any) {
+      if (error.response?.status === 401) localStorage.clear();
       toast.error(error.response?.data?.message || "Failed to delete cart");
     } finally {
       set({ isLoading: false });
@@ -110,6 +113,7 @@ const cartStore: StateCreator<ICartState> = (set) => ({
       const { data } = await axios.get(`${API_END_POINT}/${restaurantId}`);
       set({ items: data.data.cart[0].items });
     } catch (error: any) {
+      if (error.response?.status === 401) localStorage.clear();
       toast.error(
         error.response?.data?.message || "Failed to retrieve cart items"
       );
@@ -124,6 +128,7 @@ const cartStore: StateCreator<ICartState> = (set) => ({
       const { data } = await axios.get(`${API_END_POINT}`);
       set({ carts: data.data });
     } catch (error: any) {
+      if (error.response?.status === 401) localStorage.clear();
       toast.error(error.response?.data?.message || "Failed to retrieve carts");
     } finally {
       set({ isLoading: false });
