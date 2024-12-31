@@ -31,6 +31,7 @@ const userStore: StateCreator<IUserState> = (set) => ({
         });
       }
     } catch (error: any) {
+      if (error.response?.status === 401) localStorage.clear();
       toast.error(error.response.data.message);
       set({ isLoading: false });
     }
@@ -58,6 +59,7 @@ const userStore: StateCreator<IUserState> = (set) => ({
         });
       }
     } catch (error: any) {
+      if (error.response?.status === 401) localStorage.clear();
       toast.error(error.response.data.message);
       set({ isLoading: false });
     }
@@ -77,6 +79,7 @@ const userStore: StateCreator<IUserState> = (set) => ({
         localStorage.clear();
       }
     } catch (error: any) {
+      if (error.response?.status === 401) localStorage.clear();
       toast.error(error.response.data.message);
       set({ isLoading: false });
     }
@@ -87,7 +90,7 @@ const userStore: StateCreator<IUserState> = (set) => ({
   ) => {
     try {
       set({ isLoading: true });
-      const response = await axios.patch( 
+      const response = await axios.patch(
         `${API_END_POINT}/update-profile`,
         userData,
         {
@@ -105,6 +108,7 @@ const userStore: StateCreator<IUserState> = (set) => ({
         });
       }
     } catch (error: any) {
+      if (error.response?.status === 401) localStorage.clear();
       toast.error(error.response.data.message);
       set({ isLoading: false });
     }
@@ -134,6 +138,7 @@ const userStore: StateCreator<IUserState> = (set) => ({
         });
       }
     } catch (error: any) {
+      if (error.response?.status === 401) localStorage.clear();
       toast.error(error.response.data.message);
       set({ isLoading: false });
     }
@@ -160,6 +165,7 @@ const userStore: StateCreator<IUserState> = (set) => ({
         });
       }
     } catch (error: any) {
+      if (error.response?.status === 401) localStorage.clear();
       toast.error(error.response.data.message);
       set({ isLoading: false });
     }
@@ -186,6 +192,7 @@ const userStore: StateCreator<IUserState> = (set) => ({
         });
       }
     } catch (error: any) {
+      if (error.response?.status === 401) localStorage.clear();
       toast.error(error.response.data.message);
       set({ isLoading: false });
     }
@@ -205,6 +212,7 @@ const userStore: StateCreator<IUserState> = (set) => ({
         });
       }
     } catch (error: any) {
+      if (error.response?.status === 401) localStorage.clear();
       toast.error(error.response.data.message);
       set({ isLoading: false });
     }

@@ -32,6 +32,7 @@ const foodStore: StateCreator<IFoodState> = (set) => ({
       }
       toast.success(data.message);
     } catch (error: any) {
+      if (error.response?.status === 401) localStorage.clear();
       toast.error(error.data.message);
     } finally {
       set({ isLoading: false });
@@ -54,6 +55,7 @@ const foodStore: StateCreator<IFoodState> = (set) => ({
       }
       toast.success(data.message);
     } catch (error: any) {
+      if (error.response?.status === 401) localStorage.clear();
       toast.error(error.data.message);
     } finally {
       set({ isLoading: false });
@@ -67,6 +69,7 @@ const foodStore: StateCreator<IFoodState> = (set) => ({
         set({ adminMenu: data.data, isLoading: false });
       }
     } catch (error: any) {
+      if (error.response?.status === 401) localStorage.clear();
       toast.error(error.data.message);
       set({ isLoading: false });
     }
@@ -97,6 +100,7 @@ const foodStore: StateCreator<IFoodState> = (set) => ({
       }
       toast.success(response.data.message);
     } catch (error: any) {
+      if (error.response?.status === 401) localStorage.clear();
       toast.error(error.response.data.message);
     } finally {
       set({ isLoading: false });
@@ -130,6 +134,7 @@ const foodStore: StateCreator<IFoodState> = (set) => ({
       }
       toast.success(response.data.message);
     } catch (error: any) {
+      if (error.response?.status === 401) localStorage.clear();
       toast.error(error.response.data.message);
     } finally {
       set({ isLoading: false });
@@ -151,6 +156,7 @@ const foodStore: StateCreator<IFoodState> = (set) => ({
       }
       toast.success(response.data.message);
     } catch (error: any) {
+      if (error.response?.status === 401) localStorage.clear();
       toast.error(error.response.data.message);
     } finally {
       set({ isLoading: false });

@@ -2,17 +2,13 @@ import axios from "axios";
 import { toast } from "sonner";
 import { create, StateCreator } from "zustand";
 import { persist, createJSONStorage, devtools } from "zustand/middleware";
-import {
-  IOrderState,
-  IOrder,
-  OrderStatus,
-} from "@/types/order";
+import { IOrderState, IOrder, OrderStatus } from "@/types/order";
 
 const API_END_POINT = `${import.meta.env.VITE_API_URL}/api/v1/orders`;
 axios.defaults.withCredentials = true;
 
 const orderStore: StateCreator<IOrderState> = (set) => ({
-  isLoading: false, 
+  isLoading: false,
   order: {} as IOrder,
   userOrders: [] as IOrder[],
   adminOrders: [] as IOrder[],
@@ -20,11 +16,15 @@ const orderStore: StateCreator<IOrderState> = (set) => ({
   initiateOrder: async (orderData: IOrder) => {
     try {
       set({ isLoading: true });
-      const {data} = await axios.post(`${API_END_POINT}/${orderData.restaurantId}/initiate`, orderData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });      
+      const { data } = await axios.post(
+        `${API_END_POINT}/${orderData.restaurantId}/initiate`,
+        orderData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       if (data.success) {
         set({
@@ -32,8 +32,8 @@ const orderStore: StateCreator<IOrderState> = (set) => ({
           order: data.data,
         });
       }
-      
     } catch (error: any) {
+      if (error.response?.status === 401) localStorage.clear();
       toast.error(error.response.data.message);
       set({ isLoading: false });
     }
@@ -41,8 +41,8 @@ const orderStore: StateCreator<IOrderState> = (set) => ({
   getUserOrders: async () => {
     try {
       set({ isLoading: true });
-      const {data} = await axios.get(`${API_END_POINT}/`);
-      
+      const { data } = await axios.get(`${API_END_POINT}/`);
+
       if (data.success) {
         set({
           isLoading: false,
@@ -50,6 +50,7 @@ const orderStore: StateCreator<IOrderState> = (set) => ({
         });
       }
     } catch (error: any) {
+      if (error.response?.status === 401) localStorage.clear();
       toast.error(error.response.data.message);
       set({ isLoading: false });
     }
@@ -57,7 +58,7 @@ const orderStore: StateCreator<IOrderState> = (set) => ({
   getRestaurantOrders: async (restaurantId: string) => {
     try {
       set({ isLoading: true });
-      const {data} = await axios.get(
+      const { data } = await axios.get(
         `${API_END_POINT}/restaurant/${restaurantId}`
       );
       if (data.success) {
@@ -67,6 +68,7 @@ const orderStore: StateCreator<IOrderState> = (set) => ({
         });
       }
     } catch (error: any) {
+      if (error.response?.status === 401) localStorage.clear();
       toast.error(error.data.message);
       set({ isLoading: false });
     }
@@ -82,6 +84,7 @@ const orderStore: StateCreator<IOrderState> = (set) => ({
         });
       }
     } catch (error: any) {
+      if (error.response?.status === 401) localStorage.clear();
       toast.error(error.response.data.message);
       set({ isLoading: false });
     }
@@ -100,6 +103,7 @@ const orderStore: StateCreator<IOrderState> = (set) => ({
         });
       }
     } catch (error: any) {
+      if (error.response?.status === 401) localStorage.clear();
       toast.error(error.response.data.message);
       set({ isLoading: false });
     }
@@ -123,17 +127,18 @@ const orderStore: StateCreator<IOrderState> = (set) => ({
         });
       }
     } catch (error: any) {
+      if (error.response?.status === 401) localStorage.clear();
       toast.error(error.response.data.message);
       set({ isLoading: false });
     }
   },
   cancelOrderByUser: async (orderId: string, cancellationReason: string) => {
     try {
-      set({ isLoading: true });      
+      set({ isLoading: true });
       const response = await axios.patch(`${API_END_POINT}/${orderId}/cancel`, {
         cancellationReason,
       });
-      
+
       if (response.data.success) {
         toast.success(response.data.message);
         set({
@@ -142,6 +147,7 @@ const orderStore: StateCreator<IOrderState> = (set) => ({
         });
       }
     } catch (error: any) {
+      if (error.response?.status === 401) localStorage.clear();
       toast.error(error.response.data.message);
       set({ isLoading: false });
     }
@@ -165,6 +171,7 @@ const orderStore: StateCreator<IOrderState> = (set) => ({
         });
       }
     } catch (error: any) {
+      if (error.response?.status === 401) localStorage.clear();
       toast.error(error.response.data.message);
       set({ isLoading: false });
     }
@@ -187,6 +194,7 @@ const orderStore: StateCreator<IOrderState> = (set) => ({
         });
       }
     } catch (error: any) {
+      if (error.response?.status === 401) localStorage.clear();
       toast.error(error.response.data.message);
       set({ isLoading: false });
     }

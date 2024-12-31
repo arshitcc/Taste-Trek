@@ -45,6 +45,7 @@ const restaurantStore: StateCreator<IRestaurantState> = (set) => ({
         });
       }
     } catch (error: any) {
+      if (error.response?.status === 401) localStorage.clear();
       toast.error(error.response.data.message);
       set({ isLoading: false });
     }
@@ -73,6 +74,7 @@ const restaurantStore: StateCreator<IRestaurantState> = (set) => ({
         });
       }
     } catch (error: any) {
+      if (error.response?.status === 401) localStorage.clear();
       toast.error(error.response.data.message);
       set({ isLoading: false });
     }
@@ -91,6 +93,7 @@ const restaurantStore: StateCreator<IRestaurantState> = (set) => ({
         });
       }
     } catch (error: any) {
+      if (error.response?.status === 401) localStorage.clear();
       toast.error(error.response.data.message);
       set({ isLoading: false });
     }
@@ -107,6 +110,7 @@ const restaurantStore: StateCreator<IRestaurantState> = (set) => ({
         });
       }
     } catch (error: any) {
+      if (error.response?.status === 401) localStorage.clear();
       toast.error(error.response.data.message);
       set({ isLoading: false });
     }
@@ -123,6 +127,7 @@ const restaurantStore: StateCreator<IRestaurantState> = (set) => ({
         });
       }
     } catch (error: any) {
+      if (error.response?.status === 401) localStorage.clear();
       toast.error(error.response.data.message);
       set({ isLoading: false });
     }
@@ -141,6 +146,7 @@ const restaurantStore: StateCreator<IRestaurantState> = (set) => ({
         });
       }
     } catch (error: any) {
+      if (error.response?.status === 401) localStorage.clear();
       toast.error(error.response.data.message);
       set({ isLoading: false });
     }
@@ -171,6 +177,7 @@ const restaurantStore: StateCreator<IRestaurantState> = (set) => ({
         });
       }
     } catch (error: any) {
+      if (error.response?.status === 401) localStorage.clear();
       toast.error(error.response.data.message);
       set({ isLoading: false });
     }
@@ -186,6 +193,7 @@ const restaurantStore: StateCreator<IRestaurantState> = (set) => ({
         });
       }
     } catch (error: any) {
+      if (error.response?.status === 401) localStorage.clear();
       toast.error(error.response.data.message);
       set({ isLoading: false });
     }
@@ -201,6 +209,7 @@ const restaurantStore: StateCreator<IRestaurantState> = (set) => ({
         });
       }
     } catch (error: any) {
+      if (error.response?.status === 401) localStorage.clear();
       toast.error(error.response.data.message);
       set({ isLoading: false });
     }
@@ -216,6 +225,7 @@ const restaurantStore: StateCreator<IRestaurantState> = (set) => ({
         });
       }
     } catch (error: any) {
+      if (error.response?.status === 401) localStorage.clear();
       toast.error(error.response.data.message);
       set({ isLoading: false });
     }
@@ -231,6 +241,7 @@ const restaurantStore: StateCreator<IRestaurantState> = (set) => ({
         });
       }
     } catch (error: any) {
+      if (error.response?.status === 401) localStorage.clear();
       toast.error(error.response.data.message);
       set({ isLoading: false });
     }
@@ -254,6 +265,7 @@ const restaurantStore: StateCreator<IRestaurantState> = (set) => ({
         });
       }
     } catch (error: any) {
+      if (error.response?.status === 401) localStorage.clear();
       toast.error(error.response.data.message);
       set({ isLoading: false });
     }
